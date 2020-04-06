@@ -10,68 +10,45 @@ class XylophoneApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note1.wav');
-                },
-                color: Colors.red,
-//                  child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note2.wav');
-                },
-                color: Colors.orange,
-//                  child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note3.wav');
-                },
-                color: Colors.yellow,
-//                  child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note4.wav');
-                },
-                color: Colors.green,
-//                  child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note5.wav');
-                },
-                color: Colors.teal,
-//                  child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note6.wav');
-                },
-                color: Colors.blue,
-//                  child: Text('Click Me'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  final player = AudioCache();
-                  player.play('note7.wav');
-                },
-                color: Colors.purple,
-//                  child: Text('Click Me'),
-              ),
+              XylophoneButton(Colors.red, 1),
+              XylophoneButton(Colors.orange, 2),
+              XylophoneButton(Colors.yellow, 3),
+              XylophoneButton(Colors.green, 4),
+              XylophoneButton(Colors.teal, 5),
+              XylophoneButton(Colors.blue, 6),
+              XylophoneButton(Colors.purple, 7),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class XylophoneButton extends StatelessWidget {
+  final int tone;
+  final Color color;
+  const XylophoneButton(this.color, this.tone);
+  void playSound() {
+    final player = AudioCache();
+    player.play('note${this.tone}.wav');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: FlatButton(
+        onPressed: () {
+          this.playSound();
+        },
+        color: this.color,
+        child: null,
+        padding: EdgeInsets.all(0),
       ),
     );
   }
